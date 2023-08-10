@@ -48,6 +48,7 @@ export const Formulario = () => {
                         className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
                         value={nombreMascota}
                         onChange={ (e) => setNombreMascota(e.target.value) }
+                        required
                     />
                     <label htmlFor="propietario" className="block text-black uppercase font-bold">
                         Nombre Propietario
@@ -59,6 +60,7 @@ export const Formulario = () => {
                         className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
                         value={nombrePropietario}
                         onChange={ (e) => setNombrePropietario(e.target.value) }
+                        required
                     />
                     <label htmlFor="email" className="block text-black uppercase font-bold">
                         Email
@@ -70,6 +72,7 @@ export const Formulario = () => {
                         className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
                         value={email}
                         onChange={ (e) => setEmail(e.target.value) }
+                        required
                     />
                     <label htmlFor="fecha" className="block text-black uppercase font-bold">
                         Alta
@@ -81,6 +84,7 @@ export const Formulario = () => {
                         className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
                         value={fecha}
                         onChange={ (e) => setFecha(e.target.value) }
+                        required
                     />
                     <label htmlFor="sintomas" className="block text-black uppercase font-bold">
                         Síntomas
@@ -92,6 +96,7 @@ export const Formulario = () => {
                         className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
                         value={sintomas}
                         onChange={ (e) => setSintomas(e.target.value) }
+                        required
                     />
                 </div>
                 <input
