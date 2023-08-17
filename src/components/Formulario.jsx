@@ -30,6 +30,12 @@ export const Formulario = () => {
         setEmail('');
         setFecha('');
         setSintomas('');
+
+        if ({nombreMascota, nombrePropietario, email, fecha, sintomas}.includes('') ){ 
+            console.log('Hay al menos un campo vacio')
+            return;
+        }
+
     }
     
     return (
