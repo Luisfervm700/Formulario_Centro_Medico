@@ -1,6 +1,10 @@
+import { useRef } from 'react';
 
 
 export const Formulario = () => {
+
+  // Inicializamos nuestra referencia usando el Hook useRef
+  const form = useRef(null)
 
   // sendData va a simular ser solo una función que hace algo con la data
   const sendData = (nombreMascota, nombrePropietario, email, fecha, sintomas) => {
@@ -11,26 +15,30 @@ export const Formulario = () => {
     console.log(sintomas)
   }
 
-  const handleSubmit = (e) => {
-  // Vamos a capturar el evento y vamos a prevenir que siga el comportamiento
-    e.preventDefault();
-  // Desde el evento que capturamos("e"), podemos acceder a los valores de los
-  // inputs con los nombres que definimos ()
-    sendData(
-    e.target.nombreMascota.value,
-    e.target.nombrePropietario.value,
-    e.target.email.value,
-    e.target.fecha.value,
-    e.target.sintomas.value
-    );
-  }
+    // Nuestro handleSubmit hace toda la magia
+    const handleSubmit = () => {
+      // Instanciamos a la clase FormData con el nodo de form para acceder
+      // a los valores de los input
+      const formData = new FormData(form.current);
+
+
+      // Creamos un objeto que va a guardar los valores
+		  // Que a su vez obtenemos mediante el FormData
+      const registroPaciente = Object.fromEntries(formData)
+
+      // Aquí es donde simulamos mandar nuestra data
+      sendData(
+          registroPaciente
+      )
+      // limpiar campos RETO
+    }
 
 
 return (
   <div className="w-full mx-3 px-4 flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-5">
     {/* formulario */}
     <form
-      onSubmit={handleSubmit} 
+      ref={form}
       className="bg-gray-100 shadow-md rounded-lg w-full md:w-1/2 p-4"
     >
       <div className="mb-7">
@@ -43,6 +51,7 @@ return (
               placeholder="Nombre de la Mascota"
               className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
               name="nombreMascota"
+              required
             />
 
           <label htmlFor="propietario" className="block text-gray-700 uppercase font-bold">
@@ -54,6 +63,7 @@ return (
               placeholder="Nombre del propietario"
               className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
               name="nombrePropietario"
+              required
             />
 
           <label htmlFor="email" className="block text-gray-700 uppercase font-bold">
@@ -65,6 +75,7 @@ return (
               placeholder="correo electronico"
               className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
               name="email"
+              required
             />
 
           <label htmlFor="fecha" className="block text-gray-700 uppercase font-bold">
@@ -76,6 +87,7 @@ return (
               placeholder="fecha"
               className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
               name="fecha"
+              required
             />
 
           <label htmlFor="sintomas" className="block text-gray-700 uppercase font-bold">
@@ -87,14 +99,17 @@ return (
               placeholder="sintomas"
               className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
               name="sintomas"
+              required
             />
 
         </div>
-          <input
-            type="submit"
-            className="bg-indigo-600 w-full p-3 text-white uppercase font-bold hover:bg-indigo-700 cursor-pointer transition-colors"
-            value={"Agregar Paciente"}
-          />
+          <button 
+            type="button"
+              onClick={handleSubmit} // agregamos la funcion en el input boton usando el evento onClick
+              className="bg-indigo-600 w-full p-3 text-white uppercase font-bold hover:bg-indigo-700 cursor-pointer transition-colors"
+            >
+              Agregar Paciente
+          </button>
     </form>
   </div>
 );
